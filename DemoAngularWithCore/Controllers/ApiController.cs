@@ -45,7 +45,7 @@ namespace DemoAngularWithCore.Controllers
     [HttpPost]
     [Route("/api/events")]
     [AllowAnonymous]
-    public int CreateEvent([FromBody]Event ev)
+    public int CreateEvent(dynamic ev)
     {
       string bodyStr = "";
       using (StreamReader reader

@@ -23,12 +23,12 @@ var EventService = /** @class */ (function () {
     };
     EventService.prototype.getEvent = function (id) {
         return this.http.get('/api/events/' + id)
-            .pipe(operators_1.catchError(this.handleError('getEvents')));
+            .pipe(operators_1.catchError(this.handleError('getEvent')));
     };
     EventService.prototype.saveEvent = function (event) {
-        event.id = 999;
-        event.session = [];
-        EVENTS.push(event);
+        var options = { headers: new http_1.HttpHeaders({ 'content-type': 'application/json' }) };
+        return this.http.post('/api/events', event, options)
+            .pipe(operators_1.catchError(this.handleError('saveEvent')));
     };
     EventService.prototype.updateEvent = function (event) {
         var index = EVENTS.findIndex(function (x) { return x.id === event.id; });

@@ -393,9 +393,11 @@ var CreateEventComponent = /** @class */ (function () {
         this.router.navigate(['/events']);
     };
     CreateEventComponent.prototype.saveEvent = function (formValues) {
-        this.eventService.saveEvent(formValues);
-        this.isDirty = false;
-        this.router.navigate(['/events']);
+        var _this = this;
+        this.eventService.saveEvent(formValues).subscribe(function () {
+            _this.isDirty = false;
+            _this.router.navigate(['/events']);
+        });
     };
     CreateEventComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1093,7 +1095,7 @@ var EventsListComponent = /** @class */ (function () {
 /*!********************************!*\
   !*** ./src/app/event/index.ts ***!
   \********************************/
-/*! exports provided: CreateEventComponent, EventsListComponent, EventListResolver, EventThumbnailComponent, EventService, LocationValidatorDirective, restrictedWords, DurationPipe, Error404Component, EventDetailsComponent, CreateSessionComponent, SessionListComponent, UpvoteComponent, VoterService, EventResolver */
+/*! exports provided: CreateEventComponent, EventsListComponent, EventListResolver, EventThumbnailComponent, LocationValidatorDirective, EventService, restrictedWords, DurationPipe, Error404Component, EventDetailsComponent, CreateSessionComponent, SessionListComponent, UpvoteComponent, VoterService, EventResolver */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1274,12 +1276,12 @@ var EventService = /** @class */ (function () {
     };
     EventService.prototype.getEvent = function (id) {
         return this.http.get('/api/events/' + id)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getEvents')));
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getEvent')));
     };
     EventService.prototype.saveEvent = function (event) {
-        event.id = 999;
-        event.session = [];
-        EVENTS.push(event);
+        var options = { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'content-type': 'application/json' }) };
+        return this.http.post('/api/events', event, options)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('saveEvent')));
     };
     EventService.prototype.updateEvent = function (event) {
         var index = EVENTS.findIndex(function (x) { return x.id === event.id; });

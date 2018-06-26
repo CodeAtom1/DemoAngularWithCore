@@ -10,6 +10,7 @@ namespace DemoAngularWithCore.Model
 {
   public class Event
   {
+    [JsonProperty(Required=Required.AllowNull)]
     public ObjectId Id { get; set; }
     [BsonElement("id")]
     public int id { get; set; }

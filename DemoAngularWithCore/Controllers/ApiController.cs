@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 using MongoDB.Driver.Linq;
 using MongoDB.Bson.Serialization.Attributes;
 using DemoAngularWithCore.Repository;
+using DemoAngularWithCore.Model;
+using Microsoft.AspNetCore.Authorization;
+using System.IO;
+using System.Text;
 
 namespace DemoAngularWithCore.Controllers
 {
@@ -37,6 +41,21 @@ namespace DemoAngularWithCore.Controllers
       repo = new EventRepository();
       var evt = repo.GetSessionsByName(searchvalue);
       return JsonConvert.SerializeObject(evt);
+    }
+    [HttpPost]
+    [Route("/api/events")]
+    [AllowAnonymous]
+    public int CreateEvent([FromBody]Event ev)
+    {
+      string bodyStr = "";
+      using (StreamReader reader
+                 = new StreamReader(Request.Body, Encoding.UTF8, true, 1024, true))
+      {
+        bodyStr = reader.ReadToEnd();
+      }
+
+      repo = new EventRepository();
+      return repo.CreateEvent(ev);
     }
   }
 }

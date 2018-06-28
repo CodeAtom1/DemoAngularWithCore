@@ -54,13 +54,34 @@ namespace DemoAngularWithCore.Repository
       // ev.RunSynchronously();//.Wait();
       return result;
     }
-    public int CreateEvent(Event evt)
+    public int CreateEvent(Event evtNew)
     {
+      int id;
       var col = db.GetCollection<Event>("DemoEvents");
-      int id = col.AsQueryable().Max(e => e.id);
-      id = id + 1;
-      evt.id = id;
-      col.InsertOne(evt);
+      var evtList = col.AsQueryable().AsEnumerable();
+      int cnt = evtList.Count(e => e.id == evtNew.id);
+      if (cnt > 0)
+      {
+        Event ev = evtList.First(e => e.id == evtNew.id);
+        id = ev.id;
+
+        if (ev.sessions== null||ev.sessions.Length < evtNew.sessions.Length)
+        {
+          evtNew.Id = ev.Id;
+          col.DeleteOne(e => e.id == evtNew.id);
+          // Session[] arrNew = new Session[evtNew.sessions.Length];
+          col.InsertOne(evtNew);          
+          // col.Find(e => e.id == evtNew.id).First().sessions.CopyTo(arrNew, 0);//.FindOneAndReplace(e => e.id == evt.id).sessions.
+          // arrNew[arrNew.Length - 1] = evtNew.sessions[evtNew.sessions.Length - 1];
+        }
+      }
+      else
+      {
+        id = col.AsQueryable().Max(e => e.id);
+        id = id + 1;
+        evtNew.id = id;
+        col.InsertOne(evtNew);
+      }
       return id;
     }
   }

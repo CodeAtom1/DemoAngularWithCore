@@ -33,6 +33,7 @@ namespace DemoAngularWithCore.Controllers
     {
       repo = new EventRepository();
       var evt = repo.GetEventsById(id);
+      if (evt.sessions == null) evt.sessions = new Session[0];
       return JsonConvert.SerializeObject(evt);
     }
     [HttpGet("/api/sessions/search")]
@@ -42,11 +43,15 @@ namespace DemoAngularWithCore.Controllers
       var evt = repo.GetSessionsByName(searchvalue);
       return JsonConvert.SerializeObject(evt);
     }
+
     [HttpPost]
     [Route("/api/events")]
     [AllowAnonymous]
     public IActionResult CreateEvent([FromBody]Event ev)
     {
+      byte[] arrr = new byte[Request.Body.Length];
+      Request.Body.Read(arrr, 0, Convert.ToInt32(Request.Body.Length));
+      string data = System.Text.Encoding.UTF8.GetString(arrr);
       repo = new EventRepository();
       return Ok(repo.CreateEvent(ev));
     }

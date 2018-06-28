@@ -22,27 +22,33 @@ var CreateSessionComponent = /** @class */ (function () {
         this.presenter = new forms_1.FormControl('', forms_1.Validators.required);
         this.duration = new forms_1.FormControl('', forms_1.Validators.required);
         this.level = new forms_1.FormControl('', forms_1.Validators.required);
-        this.abstract = new forms_1.FormControl('', [forms_1.Validators.required,
+        this._abstract = new forms_1.FormControl('', [forms_1.Validators.required,
             forms_1.Validators.maxLength(400), restricted_words_validator_1.restrictedWords(['foo', 'bar'])]);
         this.newSessionForm = new forms_1.FormGroup({
             name: this.name,
             presenter: this.presenter,
             duration: this.duration,
             level: this.level,
-            abstract: this.abstract
+            _abstract: this._abstract
         });
+        this.newSessionForm.valueChanges.subscribe(console.log);
     };
     CreateSessionComponent.prototype.saveSession = function (formValues) {
+        alert('testing');
+        console.log('createsession 1');
         var session = {
-            id: undefined,
-            abstract: formValues.abstract,
+            eventId: 0,
+            id: 0,
+            abstract: formValues._abstract,
             duration: +formValues.duration,
             presenter: formValues.presenter,
             level: formValues.level,
             name: formValues.name,
             voters: []
         };
+        console.log('createsession 2');
         this.saveNewSession.emit(session);
+        console.log('createsession 3');
     };
     CreateSessionComponent.prototype.cancel = function () {
         this.cancelAddSession.emit();

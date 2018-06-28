@@ -32,10 +32,20 @@ var EventDetailsComponent = /** @class */ (function () {
         this.addMode = true;
     };
     EventDetailsComponent.prototype.saveNewSession = function (session) {
+        console.log('session 1');
         var maxId = Math.max.apply(null, this.event.sessions.map(function (s) { return s.id; }));
+        if (this.event.sessions.length === 0)
+            maxId = 0;
+        console.log('session 3 :' + JSON.stringify(this.event));
+        console.log('session 2 :' + maxId);
         session.id = maxId + 1;
+        session.eventId = this.event.id;
+        console.log('session 3');
         this.event.sessions.push(session);
-        this.eventService.updateEvent(this.event);
+        console.log('session pushed');
+        //this.eventService.updateEvent(this.event)
+        this.eventService.saveEvent(this.event).subscribe();
+        console.log('subscribe called');
         this.addMode = false;
     };
     EventDetailsComponent.prototype.cancelAddSession = function () {

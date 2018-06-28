@@ -18,15 +18,11 @@ export class EventService {
       .pipe(catchError(this.handleError<IEvent>('getEvent')));
   }
   saveEvent(event) {
+    console.log(event)
     let options = { headers: new HttpHeaders({ 'content-type': 'application/json' , 'encoding': 'utf-8'}) };
     return this.http.post<IEvent>('/api/events', event, options)
       .pipe(catchError(this.handleError<IEvent>('saveEvent')));
   }
-  updateEvent(event) {
-    let index = EVENTS.findIndex(x => x.id === event.id)
-    EVENTS[index] = event
-  }
-
   searchSessions(searchTerm: string): Observable<ISession[]> {
     return this.http.get<ISession[]>('/api/sessions/search?searchvalue=' + searchTerm)
       .pipe(catchError(this.handleError<ISession[]>('searchSessions', [])));

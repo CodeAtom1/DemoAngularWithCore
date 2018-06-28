@@ -17,7 +17,7 @@ var EventResolver = /** @class */ (function () {
     }
     EventResolver.prototype.resolve = function (route) {
         //resolver automatically calls subscribe on observables
-        return this.eventService.getEvent(+route.params['id']);
+        return this.eventService.getEvent(route.params['id']);
     };
     EventResolver = __decorate([
         core_1.Injectable(),

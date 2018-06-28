@@ -25,14 +25,14 @@ export class CreateSessionComponent implements OnInit
     presenter: FormControl
     duration: FormControl
     level: FormControl
-    abstract: FormControl
+    _abstract: FormControl
 
     ngOnInit(){
         this.name= new FormControl('',Validators.required)
         this.presenter= new FormControl('',Validators.required)
         this.duration= new FormControl('',Validators.required)
         this.level= new FormControl('',Validators.required)
-        this.abstract= new FormControl('',[Validators.required,
+        this._abstract= new FormControl('',[Validators.required,
             Validators.maxLength(400), restrictedWords(['foo','bar'])])
 
         this.newSessionForm=new FormGroup({
@@ -40,22 +40,29 @@ export class CreateSessionComponent implements OnInit
             presenter: this.presenter,
             duration: this.duration,
             level: this.level,
-            abstract: this.abstract
-        })
-
+            _abstract: this._abstract
+      })
+      this.newSessionForm.valueChanges.subscribe(console.log)
     }
   
-    saveSession(formValues){
-        let session: ISession={
-            id: undefined,
-            abstract: formValues.abstract,
-            duration: +formValues.duration,
-            presenter: formValues.presenter,
-            level: formValues.level,
-            name: formValues.name,
-            voters: []
-        }
-        this.saveNewSession.emit(session)
+  saveSession(formValues) {
+    alert('testing');
+
+    console.log('createsession 1');
+    let session: ISession = {
+      eventId: 0,
+      id: 0,
+      abstract: formValues._abstract,
+      duration: +formValues.duration,
+      presenter: formValues.presenter,
+      level: formValues.level,
+      name: formValues.name,
+      voters: []
+    }
+      
+    console.log('createsession 2');
+    this.saveNewSession.emit(session)
+    console.log('createsession 3');
     }
 
     cancel(){

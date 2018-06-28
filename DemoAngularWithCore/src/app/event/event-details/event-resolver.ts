@@ -11,6 +11,6 @@ export class EventResolver implements Resolve<any>
   }
   resolve(route: ActivatedRouteSnapshot) {
     //resolver automatically calls subscribe on observables
-    return this.eventService.getEvent(+route.params['id']) 
+    return this.eventService.getEvent(route.params['id']) 
   }
 }

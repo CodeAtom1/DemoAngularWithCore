@@ -25,8 +25,8 @@ export class EventDetailsComponent implements OnInit {
    Service(eventService is business layer service) */
   ngOnInit() {
     this.activatedRoute.data.forEach((data) => {
-        this.event = data['event'] 
-        this.addMode = false
+      this.event = data['event']
+      this.addMode = false
     })
   }
 
@@ -34,11 +34,22 @@ export class EventDetailsComponent implements OnInit {
     this.addMode = true
   }
   saveNewSession(session: ISession) {
-    const maxId = Math.max.apply(null, this.event.sessions.map(s => s.id))
-    session.id = maxId + 1
+    console.log('session 1')
 
+    let maxId = Math.max.apply(null, this.event.sessions.map(s => s.id))
+    if (this.event.sessions.length===0)
+      maxId = 0;
+    console.log('session 3 :' + JSON.stringify(this.event))
+    console.log('session 2 :' + maxId)
+    session.id = maxId + 1
+    session.eventId = this.event.id
+
+    console.log('session 3')
     this.event.sessions.push(session)
-    this.eventService.updateEvent(this.event)
+    console.log('session pushed')
+    //this.eventService.updateEvent(this.event)
+    this.eventService.saveEvent(this.event).subscribe()
+    console.log('subscribe called')
     this.addMode = false
   }
   cancelAddSession() {

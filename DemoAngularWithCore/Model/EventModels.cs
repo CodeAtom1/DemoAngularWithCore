@@ -22,10 +22,9 @@ namespace DemoAngularWithCore.Model
     public double price { get; set; }
     public string imageUrl { get; set; }
     public Location location { get; set; }
-
     //[JsonIgnore]
     [BsonElement]
-    public Session[] sessions { get; set; }
+    public Session[] sessions { get; set; } = new Session[0];
     public string onlineUrl { get; set; }
   }
 
@@ -38,6 +37,8 @@ namespace DemoAngularWithCore.Model
 
   public class Session
   {
+    public int eventId { get; set; }
+    [JsonIgnore]
     public ObjectId Id { get; set; }
     [BsonElement]
     public int id { get; set; }

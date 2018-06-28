@@ -26,13 +26,10 @@ var EventService = /** @class */ (function () {
             .pipe(operators_1.catchError(this.handleError('getEvent')));
     };
     EventService.prototype.saveEvent = function (event) {
+        console.log(event);
         var options = { headers: new http_1.HttpHeaders({ 'content-type': 'application/json', 'encoding': 'utf-8' }) };
         return this.http.post('/api/events', event, options)
             .pipe(operators_1.catchError(this.handleError('saveEvent')));
-    };
-    EventService.prototype.updateEvent = function (event) {
-        var index = EVENTS.findIndex(function (x) { return x.id === event.id; });
-        EVENTS[index] = event;
     };
     EventService.prototype.searchSessions = function (searchTerm) {
         return this.http.get('/api/sessions/search?searchvalue=' + searchTerm)

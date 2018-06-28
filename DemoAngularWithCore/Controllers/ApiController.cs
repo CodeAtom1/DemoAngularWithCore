@@ -45,17 +45,10 @@ namespace DemoAngularWithCore.Controllers
     [HttpPost]
     [Route("/api/events")]
     [AllowAnonymous]
-    public int CreateEvent(dynamic ev)
+    public IActionResult CreateEvent([FromBody]Event ev)
     {
-      string bodyStr = "";
-      using (StreamReader reader
-                 = new StreamReader(Request.Body, Encoding.UTF8, true, 1024, true))
-      {
-        bodyStr = reader.ReadToEnd();
-      }
-
       repo = new EventRepository();
-      return repo.CreateEvent(ev);
+      return Ok(repo.CreateEvent(ev));
     }
   }
 }

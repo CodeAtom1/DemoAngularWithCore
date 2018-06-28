@@ -32,17 +32,27 @@ namespace DemoAngularWithCore.Repository
     {
       List<Session> result = new List<Session>();
       var evCol = db.GetCollection<Event>("DemoEvents");
+      string msg = "";
+      //new Task(() =>
       Task ev = evCol.AsQueryable<Event>().ForEachAsync(async (evt) =>
+      {
+        try
         {
-          var found = evt.sessions.AsEnumerable().Where(s => s.name.ToUpper().Contains(searchTerm.ToUpper())).ToList();
+          var a = evt.sessions.AsEnumerable();
+          var found = a.Where(s => s.name.ToUpper().Contains(searchTerm.ToUpper())).ToList();
           result.AddRange(found);
-        });//.RunSynchronously();
-      ev.Wait();
-      return result;
+        }
+        catch (Exception ex)
+        {
+          msg = ex.Message;
+        }
 
-      //  =>(
-      //e => e.sessions.AsEnumerable().Where(s=>s.name.Contains(searchTerm))
-      //).FirstOrDefault();
+      });
+      while (!ev.IsCompleted) { }
+      ev.Wait();
+      //.RunSynchronously();
+      // ev.RunSynchronously();//.Wait();
+      return result;
     }
     public int CreateEvent(Event evt)
     {

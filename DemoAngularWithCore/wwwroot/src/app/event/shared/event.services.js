@@ -26,7 +26,7 @@ var EventService = /** @class */ (function () {
             .pipe(operators_1.catchError(this.handleError('getEvent')));
     };
     EventService.prototype.saveEvent = function (event) {
-        var options = { headers: new http_1.HttpHeaders({ 'content-type': 'application/json' }) };
+        var options = { headers: new http_1.HttpHeaders({ 'content-type': 'application/json', 'encoding': 'utf-8' }) };
         return this.http.post('/api/events', event, options)
             .pipe(operators_1.catchError(this.handleError('saveEvent')));
     };

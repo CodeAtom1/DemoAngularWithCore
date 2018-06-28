@@ -10,9 +10,10 @@ namespace DemoAngularWithCore.Model
 {
   public class Event
   {
-
+    [BsonId]
     [JsonIgnore]
     public ObjectId Id { get; set; }
+    //[JsonIgnore]
     [BsonElement("id")]
     public int id { get; set; }
     public string name { get; set; }
@@ -22,6 +23,7 @@ namespace DemoAngularWithCore.Model
     public string imageUrl { get; set; }
     public Location location { get; set; }
 
+    //[JsonIgnore]
     [BsonElement]
     public Session[] sessions { get; set; }
     public string onlineUrl { get; set; }

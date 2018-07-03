@@ -49,11 +49,28 @@ namespace DemoAngularWithCore.Controllers
     [AllowAnonymous]
     public IActionResult CreateEvent([FromBody]Event ev)
     {
-      byte[] arrr = new byte[Request.Body.Length];
-      Request.Body.Read(arrr, 0, Convert.ToInt32(Request.Body.Length));
-      string data = System.Text.Encoding.UTF8.GetString(arrr);
+      //byte[] arrr = new byte[Request.Body.Length];
+      //Request.Body.Read(arrr, 0, Convert.ToInt32(Request.Body.Length));
+      //string data = System.Text.Encoding.UTF8.GetString(arrr);
       repo = new EventRepository();
       return Ok(repo.CreateEvent(ev));
+    }
+
+    [HttpPost]
+    [Route("/api/events/{eventId}/sessions/{sessionId}/voters/{voterName}")]
+    [AllowAnonymous]
+    public IActionResult UpdateVoters(int eventId, int sessionId, string voterName)
+    {
+      repo = new EventRepository();
+      return Ok(repo.UpdateVoters(eventId, sessionId, voterName, true));
+    }
+    [HttpDelete]
+    [Route("/api/events/{eventId}/sessions/{sessionId}/voters/{voterName}")]
+    [AllowAnonymous]
+    public IActionResult deleteVoters(int eventId, int sessionId, string voterName)
+    {
+      repo = new EventRepository();
+      return Ok(repo.UpdateVoters(eventId, sessionId, voterName, false));
     }
   }
 }

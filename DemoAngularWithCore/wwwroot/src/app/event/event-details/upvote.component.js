@@ -40,8 +40,8 @@ var UpvoteComponent = /** @class */ (function () {
     UpvoteComponent = __decorate([
         core_1.Component({
             selector: 'upvote',
-            template: "\n    <div class=\"votingWidgetContainer pointable\" (click)=\"onClick()\">\n         <div class=\"well votingWidget\">\n            <div class=\"votingButton\">\n                <i class=\"glyphicon glyphicon-heart\" \n                [style.color]=\"iconColor\"> </i>\n            </div>\n            <div class=\"badge badge-inverse votingCount\">\n                <div>{{count}} </div>\n            </div>\n         </div>\n    </div>\n    ",
-            styleUrls: ['upvote.component.css']
+            template: "\n    <div class=\"votingWidgetContainer pointable\">\n         <div class=\"well votingWidget\"  (click)=\"onClick()\">\n            <div class=\"votingButton\">\n                <i class=\"glyphicon glyphicon-heart\" \n                [style.color]=\"iconColor\"> </i>\n            </div>\n            <div class=\"badge badge-inverse votingCount\">\n                <div>{{count}} </div>\n            </div>\n         </div>\n    </div>\n    ",
+            styleUrls: ['./upvote.component.css']
         })
     ], UpvoteComponent);
     return UpvoteComponent;

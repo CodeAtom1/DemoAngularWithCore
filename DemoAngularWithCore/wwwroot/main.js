@@ -402,8 +402,7 @@ var CreateEventComponent = /** @class */ (function () {
     CreateEventComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             template: __webpack_require__(/*! ./create-event.component.html */ "./src/app/event/create-event.component.html"),
-            styles: ["\n    em { float: right; padding-left: 10px; color: #E05C65;}\n    .error input{ background-color: #E3C3C5;}\n    .error ::-webkit-input-placeholder { color: #999}\n    .error ::-moz-placeholder { color: #999}\n    .error :-moz-placeholder { color: #999}\n    .error :ms-input-placeholder { color: #999}    \n  "
-            ]
+            styles: ["\n    em { float: right; padding-left: 10px; color: #E05C65;}\n    .error input{ background-color: #E3C3C5;}\n    .error ::-webkit-input-placeholder { color: #999}\n    .error ::-moz-placeholder { color: #999}\n    .error :-moz-placeholder { color: #999}\n    .error :ms-input-placeholder { color: #999}    \n  "]
         }),
         __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _shared__WEBPACK_IMPORTED_MODULE_2__["EventService"]])
     ], CreateEventComponent);
@@ -575,7 +574,7 @@ var CreateSessionComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n    <img [src]=\"event?.imageUrl\" [alt]=\"event?.name\" \r\n    class=\"event-image\">\r\n  \r\n    <div class=\"row\">\r\n      <div class=\"col-md-11\">\r\n        <h2>{{event?.name | uppercase }} </h2>\r\n      </div>\r\n    </div>\r\n  \r\n    <div class=\"row\">\r\n      <div class=\"col-md-6\">\r\n        <div><strong>Date:</strong> {{event?.date | date: 'shortDate'}}</div>\r\n        <div><strong>Time:</strong> {{event?.time}}</div>\r\n        <div><strong>Price:</strong> {{event?.price | currency: 'USD'}}</div>\r\n      </div>\r\n      <div class=\"col-md-6\">\r\n        <address>\r\n          <strong>Address:</strong><br />\r\n          {{event?.location?.address}}<br />\r\n          {{event?.location?.city}}, {{event?.location?.country}}\r\n        </address>\r\n      </div>\r\n    </div>\r\n    <hr/>\r\n    <div class=\"row\"   style=\"margin-bottom: 10px\">\r\n      <div class=\"col-md-2\">\r\n        <h3 style=\"margin: 0\">Sessions</h3>\r\n      </div>\r\n      <div class=\"col-md-7\">        \r\n          <div class=\"btn-group btn-group-sm\" style=\"margin-right:20px;\">\r\n              <button class=\"btn btn-default\" [class.active]=\"sortBy==='name'\" \r\n              (click)=\"sortBy='name'\"> Name </button>\r\n              <button class=\"btn btn-default\" [class.active]=\"sortBy==='votes'\" \r\n              (click)=\"sortBy='votes'\"> Votes </button>\r\n          </div>\r\n\r\n        <div class=\"btn-group btn-group-sm\">\r\n          <button class=\"btn btn-default\" [class.active]=\"filterBy==='all'\" \r\n          (click)=\"filterBy='all'\"> All </button>\r\n          <button class=\"btn btn-default\" [class.active]=\"filterBy==='beginner'\" \r\n          (click)=\"filterBy='beginner'\"> Beginner </button>\r\n          <button class=\"btn btn-default\" [class.active]=\"filterBy==='intermediate'\" \r\n          (click)=\"filterBy='intermediate'\"> Intermediate </button>\r\n          <button class=\"btn btn-default\" [class.active]=\"filterBy==='advanced'\" \r\n          (click)=\"filterBy='advanced'\"> Advanced </button>\r\n        </div>\r\n      </div>\r\n      \r\n      <div class=\"col-md-2\">\r\n        <a (click)=\"addSession()\"> Add Session</a>\r\n      </div>\r\n    </div>\r\n\r\n    <create-session *ngIf=\"addMode\" (saveNewSession)=\"saveNewSession($event)\"\r\n    (cancelAddSession)=\"cancelAddSession()\"> </create-session>\r\n    <session-list [sortBy]=\"sortBy\" [filterBy]=\"filterBy\" *ngIf=\"!addMode\" [sessions]=\"event?.sessions\" ></session-list>\r\n  </div>\r\n"
+module.exports = "<div class=\"container\">\r\n    <img [src]=\"event?.imageUrl\" [alt]=\"event?.name\" \r\n    class=\"event-image\">\r\n  \r\n    <div class=\"row\">\r\n      <div class=\"col-md-11\">\r\n        <h2>{{event?.name | uppercase }} </h2>\r\n      </div>\r\n    </div>\r\n  \r\n    <div class=\"row\">\r\n      <div class=\"col-md-6\">\r\n        <div><strong>Date:</strong> {{event?.date | date: 'shortDate'}}</div>\r\n        <div><strong>Time:</strong> {{event?.time}}</div>\r\n        <div><strong>Price:</strong> {{event?.price | currency: 'USD'}}</div>\r\n      </div>\r\n      <div class=\"col-md-6\">\r\n        <address>\r\n          <strong>Address:</strong><br />\r\n          {{event?.location?.address}}<br />\r\n          {{event?.location?.city}}, {{event?.location?.country}}\r\n        </address>\r\n      </div>\r\n    </div>\r\n    <hr/>\r\n    <div class=\"row\"   style=\"margin-bottom: 10px\">\r\n      <div class=\"col-md-2\">\r\n        <h3 style=\"margin: 0\">Sessions</h3>\r\n      </div>\r\n      <div class=\"col-md-7\">        \r\n          <div class=\"btn-group btn-group-sm\" style=\"margin-right:20px;\">\r\n              <button class=\"btn btn-default\" [class.active]=\"sortBy==='name'\" \r\n              (click)=\"sortBy='name'\"> Name </button>\r\n              <button class=\"btn btn-default\" [class.active]=\"sortBy==='votes'\" \r\n              (click)=\"sortBy='votes'\"> Votes </button>\r\n          </div>\r\n\r\n        <div class=\"btn-group btn-group-sm\">\r\n          <button class=\"btn btn-default\" [class.active]=\"filterBy==='all'\" \r\n          (click)=\"filterBy='all'\"> All </button>\r\n          <button class=\"btn btn-default\" [class.active]=\"filterBy==='beginner'\" \r\n          (click)=\"filterBy='beginner'\"> Beginner </button>\r\n          <button class=\"btn btn-default\" [class.active]=\"filterBy==='intermediate'\" \r\n          (click)=\"filterBy='intermediate'\"> Intermediate </button>\r\n          <button class=\"btn btn-default\" [class.active]=\"filterBy==='advanced'\" \r\n          (click)=\"filterBy='advanced'\"> Advanced </button>\r\n        </div>\r\n      </div>\r\n      \r\n      <div class=\"col-md-2\">\r\n        <a (click)=\"addSession()\"> Add Session</a>\r\n      </div>\r\n    </div>\r\n\r\n    <create-session  *ngIf=\"addMode\" (saveNewSession)=\"saveNewSession($event)\"\r\n    (cancelAddSession)=\"cancelAddSession()\"> </create-session>\r\n    <session-list [eventId]=\"event?.id\" [sortBy]=\"sortBy\" [filterBy]=\"filterBy\" *ngIf=\"!addMode\" [sessions]=\"event?.sessions\" ></session-list>\r\n  </div>\r\n"
 
 /***/ }),
 
@@ -797,10 +796,10 @@ var SessionListComponent = /** @class */ (function () {
     };
     SessionListComponent.prototype.toggleVote = function (session) {
         if (this.userHasVoted(session)) {
-            this.voterService.deleteVoter(session, this.auth.currentUser.userName);
+            this.voterService.deleteVoter(this.eventId, session, this.auth.currentUser.userName);
         }
         else {
-            this.voterService.addVoter(session, this.auth.currentUser.userName);
+            this.voterService.addVoter(this.eventId, session, this.auth.currentUser.userName);
         }
         if (this.sortBy === 'votes') {
             this.visibleSessions.sort(sortByVotesDesc);
@@ -821,6 +820,10 @@ var SessionListComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", String)
     ], SessionListComponent.prototype, "sortBy", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Number)
+    ], SessionListComponent.prototype, "eventId", void 0);
     SessionListComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'session-list',
@@ -908,7 +911,7 @@ var UpvoteComponent = /** @class */ (function () {
     UpvoteComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'upvote',
-            template: "\n    <div class=\"votingWidgetContainer pointable\" (click)=\"onClick()\">\n         <div class=\"well votingWidget\">\n            <div class=\"votingButton\">\n                <i class=\"glyphicon glyphicon-heart\" \n                [style.color]=\"iconColor\"> </i>\n            </div>\n            <div class=\"badge badge-inverse votingCount\">\n                <div>{{count}} </div>\n            </div>\n         </div>\n    </div>\n    ",
+            template: "\n    <div class=\"votingWidgetContainer pointable\">\n         <div class=\"well votingWidget\"  (click)=\"onClick()\">\n            <div class=\"votingButton\">\n                <i class=\"glyphicon glyphicon-heart\" \n                [style.color]=\"iconColor\"> </i>\n            </div>\n            <div class=\"badge badge-inverse votingCount\">\n                <div>{{count}} </div>\n            </div>\n         </div>\n    </div>\n    ",
             styles: [__webpack_require__(/*! ./upvote.component.css */ "./src/app/event/event-details/upvote.component.css")]
         })
     ], UpvoteComponent);
@@ -930,29 +933,56 @@ var UpvoteComponent = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VoterService", function() { return VoterService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
 
 var VoterService = /** @class */ (function () {
-    function VoterService() {
+    function VoterService(httpService) {
+        this.httpService = httpService;
     }
-    VoterService.prototype.deleteVoter = function (session, voterName) {
+    VoterService.prototype.deleteVoter = function (eventId, session, voterName) {
         session.voters = session.voters.filter(function (voter) {
             return voter !== voterName;
         });
+        var url = "/api/events/" + eventId + "/sessions/" + session.id + "/voters/" + voterName;
+        this.httpService.delete(url)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('deleteVoter')))
+            .subscribe();
     };
-    VoterService.prototype.addVoter = function (session, voterName) {
+    VoterService.prototype.addVoter = function (eventId, session, voterName) {
         session.voters.push(voterName);
+        var url = "/api/events/" + eventId + "/sessions/" + session.id + "/voters/" + voterName;
+        var options = { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'content-type': 'application/json' }) };
+        this.httpService.post(url, {}, options)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('addVoter')))
+            .subscribe();
     };
     VoterService.prototype.userHasVoted = function (session, voterName) {
         return session.voters.some(function (voter) { return voter === voterName; });
     };
+    VoterService.prototype.handleError = function (operation, result) {
+        if (operation === void 0) { operation = 'operation'; }
+        return function (error) {
+            console.log(error);
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(result);
+        };
+    };
     VoterService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])()
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], VoterService);
     return VoterService;
 }());

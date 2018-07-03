@@ -6,6 +6,9 @@
 
   <ItemGroup>
     <None Remove="src\app\event\event-details\event-resolver.ts" />
+    <None Remove="src\app\event\event-details\session-list.component.integrated.spec.ts" />
+    <None Remove="src\app\event\event-details\session-list.component.isolated.spec.ts" />
+    <None Remove="src\app\event\event-details\voter.service.spec.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +22,9 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="src\app\event\event-details\event-resolver.ts" />
+    <TypeScriptCompile Include="src\app\event\event-details\session-list.component.integrated.spec.ts" />
+    <TypeScriptCompile Include="src\app\event\event-details\session-list.component.isolated.spec.ts" />
+    <TypeScriptCompile Include="src\app\event\event-details\voter.service.spec.ts" />
   </ItemGroup>
 
 </Project>

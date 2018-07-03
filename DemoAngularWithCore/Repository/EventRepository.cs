@@ -65,14 +65,11 @@ namespace DemoAngularWithCore.Repository
         Event ev = evtList.First(e => e.id == evtNew.id);
         id = ev.id;
 
-        if (ev.sessions== null||ev.sessions.Length < evtNew.sessions.Length)
+        if (ev.sessions == null || ev.sessions.Length < evtNew.sessions.Length)
         {
-          evtNew.Id = ev.Id;
+          evtNew.Id = ev.Id;//update to existing, so objectid will be same
           col.DeleteOne(e => e.id == evtNew.id);
-          // Session[] arrNew = new Session[evtNew.sessions.Length];
-          col.InsertOne(evtNew);          
-          // col.Find(e => e.id == evtNew.id).First().sessions.CopyTo(arrNew, 0);//.FindOneAndReplace(e => e.id == evt.id).sessions.
-          // arrNew[arrNew.Length - 1] = evtNew.sessions[evtNew.sessions.Length - 1];
+          col.InsertOne(evtNew);
         }
       }
       else
@@ -83,6 +80,41 @@ namespace DemoAngularWithCore.Repository
         col.InsertOne(evtNew);
       }
       return id;
+    }
+
+    public string UpdateVoters(int eventId, int sessionId, string voterName, bool IsAdd)
+    {
+      var col = db.GetCollection<Event>("DemoEvents");
+      var evtList = col.AsQueryable().AsEnumerable();
+      int cnt = evtList.Count(e => e.id == eventId);
+      if (cnt > 0)
+      {
+        Event ev = evtList.First(e => e.id == eventId);
+
+        if (ev.sessions == null || ev.sessions.Length > 0)
+        {
+          IEnumerable<Session> sessions = ev.sessions.AsEnumerable();
+          sessions = sessions.Select(s =>
+          {
+            if (s.id == sessionId)
+            {
+              if (IsAdd)
+              {
+                var list = s.voters.ToList();
+                list.Add(voterName);
+                s.voters = list.ToArray();
+              }
+              else
+                s.voters = s.voters.Where(val => val != voterName).ToArray();
+            }
+            return s;
+          });
+          col.FindOneAndUpdate(
+            Builders<Event>.Filter.Eq(e => e.id, eventId) & Builders<Event>.Filter.Eq(e => e.id, eventId),
+            Builders<Event>.Update.Set(e => e.sessions, sessions));
+        }
+      }
+      return "Updated";
     }
   }
 }
